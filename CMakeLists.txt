@@ -35,12 +35,15 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 # Generate compile_commands.json to make it easier to work with clang based tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# Project-level options
 option(AOC24_WARNINGS_AS_ERRORS "Build with warnings treated as errors" OFF)
 option(AOC24_PEDANTIC_WARNINGS  "Build with as many reasonable warnings enabled" OFF)
+option(AOC24_ENABLE_CLANG_TIDY  "Enable clang-tidy support" OFF)
 
 if(PROJECT_IS_TOP_LEVEL)
   set(AOC24_WARNINGS_AS_ERRORS ON)
   set(AOC24_PEDANTIC_WARNINGS ON)
+  set(AOC24_ENABLE_CLANG_TIDY ON)
 endif()
 
 # If the environment has these set, pull them into proper variables.
@@ -86,6 +89,31 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:${CLANG_WARNINGS}>")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:${GCC_WARNINGS}>")
+endif()
+
+if(AOC24_ENABLE_CLANG_TIDY)
+  find_program(CLANGTIDY clang-tidy)
+  if(CLANGTIDY)
+    # construct the clang-tidy command line
+    set(CLANG_TIDY_OPTIONS
+      ${CLANGTIDY}
+      -extra-arg=-Wno-unknown-warning-option
+      -extra-arg=-Wno-ignored-optimization-argument
+      -extra-arg=-Wno-unused-command-line-argument
+      -p
+      -extra-arg=-std=c++${CMAKE_CXX_STANDARD}
+    )
+
+    # set warnings as errors
+    if(AOC24_WARNINGS_AS_ERRORS)
+      list(APPEND CLANG_TIDY_OPTIONS -warnings-as-errors=*)
+    endif()
+
+    message("-- Also setting clang-tidy globally")
+    set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_OPTIONS})
+  else()
+    message(${WARNING_MESSAGE} "clang-tidy requested but executable not found")
+  endif()
 endif()
 
 add_subdirectory(src)
