@@ -16,8 +16,12 @@ int main() {
     std::vector<int> list2(n_rows);
     for (size_t i = 0; i < n_rows; ++i) {
         assert(data[i].size() == 2);
+
         list1[i] = std::stoi(data[i].front());
         list2[i] = std::stoi(data[i].back());
+
+        assert(list1[i] >= 0);
+        assert(list2[i] >= 0);
     }
 
     // Part One
@@ -26,7 +30,7 @@ int main() {
 
     size_t total_distance = 0;
     for (size_t i = 0; i < n_rows; ++i) {
-        total_distance += std::abs(list1[i] - list2[i]);
+        total_distance += static_cast<size_t>(std::abs(list1[i] - list2[i]));
     }
 
     std::cout << "Total distance for " << n_rows << " rows: " << total_distance << '\n';
@@ -44,7 +48,7 @@ int main() {
     size_t total_similarity = 0;
     for (const auto& val : list1) {
         if (list2_counts.count(val)) {
-            total_similarity += val * list2_counts.at(val);
+            total_similarity += static_cast<size_t>(val) * list2_counts.at(val);
         }
     }
 
