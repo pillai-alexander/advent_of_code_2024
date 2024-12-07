@@ -7,6 +7,10 @@
 # unignore all directories
 !*/
 
+# directory ignores
 build/
-
 .vscode/
+
+# other ignores
+*.out
+*.txt
