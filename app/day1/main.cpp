@@ -23,7 +23,7 @@ int main() {
     std::sort(list1.begin(), list1.end());
     std::sort(list2.begin(), list2.end());
 
-    unsigned int total_distance = 0;
+    size_t total_distance = 0;
     for (size_t i = 0; i < n_rows; ++i) {
         total_distance += std::abs(list1[i] - list2[i]);
     }
