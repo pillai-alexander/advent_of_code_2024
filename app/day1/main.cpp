@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <map>
 #include <algorithm>
 #include <cassert>
 #include <cmath>
@@ -29,6 +30,25 @@ int main() {
     }
 
     std::cout << "Total distance for " << n_rows << " rows: " << total_distance << '\n';
+
+    // Part Two
+    std::map<int, size_t> list2_counts;
+    for (const auto& val : list2) {
+        if (list2_counts.count(val)) {
+            list2_counts.at(val)++;
+        } else {
+            list2_counts[val] = 1;
+        }
+    }
+
+    size_t total_similarity = 0;
+    for (const auto& val : list1) {
+        if (list2_counts.count(val)) {
+            total_similarity += val * list2_counts.at(val);
+        }
+    }
+
+    std::cout << "Total similarity for " << n_rows << " rows: " << total_similarity << '\n';
 
     return 0;
 }
