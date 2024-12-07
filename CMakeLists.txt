@@ -41,11 +41,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(AOC24_WARNINGS_AS_ERRORS "Build with warnings treated as errors" OFF)
 option(AOC24_PEDANTIC_WARNINGS  "Build with as many reasonable warnings enabled" OFF)
 option(AOC24_ENABLE_CLANG_TIDY  "Enable clang-tidy support" OFF)
+option(AOC24_ENABLE_CPPCHECK    "Enable cppcheck support" OFF)
 
 if(PROJECT_IS_TOP_LEVEL)
   set(AOC24_WARNINGS_AS_ERRORS ON)
   set(AOC24_PEDANTIC_WARNINGS ON)
   set(AOC24_ENABLE_CLANG_TIDY ON)
+  set(AOC24_ENABLE_CPPCHECK ON)
 endif()
 
 # If the environment has these set, pull them into proper variables.
@@ -131,6 +133,41 @@ if(AOC24_ENABLE_CLANG_TIDY)
     set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_OPTIONS})
   else()
     message(${WARNING_MESSAGE} "clang-tidy requested but executable not found")
+  endif()
+endif()
+
+if(AOC24_ENABLE_CPPCHECK)
+  find_program(CPPCHECK cppcheck)
+  if(CPPCHECK)
+    set(SUPPRESS_DIR "*:${CMAKE_CURRENT_BINARY_DIR}/_deps/*.h")
+    message(STATUS "CPPCHECK_OPTIONS suppress: ${SUPPRESS_DIR}")
+
+    set(CPPCHECK_TEMPLATE "gcc")
+    set(CMAKE_CXX_CPPCHECK
+      ${CPPCHECK}
+      --template=${CPPCHECK_TEMPLATE}
+      --enable=style,performance,warning,portability
+      --inline-suppr
+      # We cannot act on a bug/missing feature of cppcheck
+      --suppress=cppcheckError
+      --suppress=internalAstError
+      # if a file does not have an internalAstError, we get an unmatchedSuppression error
+      --suppress=unmatchedSuppression
+      # noisy and incorrect sometimes
+      --suppress=passedByValue
+      # ignores code that cppcheck thinks is invalid C++
+      --suppress=syntaxError
+      --suppress=preprocessorErrorDirective
+      --inconclusive
+      --suppress=${SUPPRESS_DIR}
+      --std=c++${CMAKE_CXX_STANDARD}
+    )
+
+    if(AOC24_WARNINGS_AS_ERRORS)
+      list(APPEND CMAKE_CXX_CPPCHECK --error-exitcode=2)
+    endif()
+  else()
+    message(${WARNING_MESSAGE} "cppcheck requested but executable not found")
   endif()
 endif()
 
