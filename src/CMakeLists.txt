@@ -4,3 +4,5 @@ add_library(advent_2024_library
 )
 
 target_include_directories(advent_2024_library PUBLIC .)
+
+target_link_libraries(advent_2024_library CLI11::CLI11 fmt::fmt)

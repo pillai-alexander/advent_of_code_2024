@@ -6,6 +6,8 @@
 #include <cmath>
 
 #include <advent_2024_lib.hpp>
+#include <fmt/core.h>
+#include <CLI/CLI.hpp>
 
 int main() {
     // Data pre-processing

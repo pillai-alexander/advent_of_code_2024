@@ -118,6 +118,11 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:${GCC_WARNINGS}>")
 endif()
 
+include(cmake/CPM.cmake)
+
+CPMAddPackage("gh:fmtlib/fmt#11.0.2")
+CPMAddPackage("gh:CLIUtils/CLI11@2.4.2")
+
 if(AOC24_ENABLE_CLANG_TIDY)
   find_program(CLANGTIDY clang-tidy)
   if(CLANGTIDY)
