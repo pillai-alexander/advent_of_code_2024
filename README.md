@@ -10,7 +10,7 @@ I want to use AoC 2024 to learn about more modern C++ best practices and workflo
 - sanitizers (done)
 - compiler flags (done)
 - build modes (partial)
-- automated linting, analysis, testing
+- automated linting, analysis, testing (partial)
 - better package management using CPM
 
 ## Resources
