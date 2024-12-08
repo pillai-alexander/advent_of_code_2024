@@ -11,7 +11,7 @@ I want to use AoC 2024 to learn about more modern C++ best practices and workflo
 - compiler flags (done)
 - build modes (partial)
 - automated linting, analysis, testing (partial)
-- better package management using CPM
+- better package management using CPM (done)
 
 ## Resources
 
