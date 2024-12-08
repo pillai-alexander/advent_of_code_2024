@@ -38,7 +38,7 @@ int main() {
     // Part Two
     std::map<int, size_t> list2_counts;
     for (const auto& val : list2) {
-        if (list2_counts.count(val)) {
+        if (static_cast<bool>(list2_counts.count(val))) {
             list2_counts.at(val)++;
         } else {
             list2_counts[val] = 1;
@@ -47,7 +47,7 @@ int main() {
 
     size_t total_similarity = 0;
     for (const auto& val : list1) {
-        if (list2_counts.count(val)) {
+        if (static_cast<bool>(list2_counts.count(val))) {
             total_similarity += static_cast<size_t>(val) * list2_counts.at(val);
         }
     }
