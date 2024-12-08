@@ -12,3 +12,9 @@ I want to use AoC 2024 to learn about more modern C++ best practices and workflo
 - build modes (partial)
 - automated linting, analysis, testing
 - better package management using CPM
+
+## Resources
+
+- [C++ Best Practices Repo](https://github.com/cpp-best-practices/cppbestpractices/blob/master/02-Use_the_Tools_Available.md)
+- [C++ Best Practices CMake Template](https://github.com/cpp-best-practices/cmake_template)
+- [OSP Repo as a good example to look at](https://github.com/TheOpenSpaceProgram/osp-magnum)
