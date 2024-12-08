@@ -38,16 +38,23 @@ endif()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Project-level options
-option(AOC24_WARNINGS_AS_ERRORS "Build with warnings treated as errors" OFF)
-option(AOC24_PEDANTIC_WARNINGS  "Build with as many reasonable warnings enabled" OFF)
-option(AOC24_ENABLE_CLANG_TIDY  "Enable clang-tidy support" OFF)
-option(AOC24_ENABLE_CPPCHECK    "Enable cppcheck support" OFF)
+option(AOC24_WARNINGS_AS_ERRORS         "Build with warnings treated as errors" OFF)
+option(AOC24_PEDANTIC_WARNINGS          "Build with as many reasonable warnings enabled" OFF)
+option(AOC24_ENABLE_CLANG_TIDY          "Enable clang-tidy support" OFF)
+option(AOC24_ENABLE_CPPCHECK            "Enable cppcheck support" OFF)
+option(AOC24_ENABLE_SANITIZER_ADDRESS   "Enable address sanitizer" OFF)
+option(AOC24_ENABLE_SANITIZER_LEAK      "Enable leak sanitizer" OFF)
+option(AOC24_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizer" OFF)
+option(AOC24_ENABLE_SANITIZER_MEMORY    "Enable memory sanitizer" OFF)
 
 if(PROJECT_IS_TOP_LEVEL)
   set(AOC24_WARNINGS_AS_ERRORS ON)
   set(AOC24_PEDANTIC_WARNINGS ON)
   set(AOC24_ENABLE_CLANG_TIDY ON)
   set(AOC24_ENABLE_CPPCHECK ON)
+  set(AOC24_ENABLE_SANITIZER_ADDRESS ON)
+  set(AOC24_ENABLE_SANITIZER_LEAK ON)
+  set(AOC24_ENABLE_SANITIZER_UNDEFINED ON)
 endif()
 
 # If the environment has these set, pull them into proper variables.
@@ -168,6 +175,42 @@ if(AOC24_ENABLE_CPPCHECK)
     endif()
   else()
     message(${WARNING_MESSAGE} "cppcheck requested but executable not found")
+  endif()
+endif()
+
+if(AOC24_ENABLE_SANITIZER_ADDRESS
+   OR AOC24_ENABLE_SANITIZER_LEAK
+   OR AOC24_ENABLE_SANITIZER_MEMORY
+   OR AOC24_ENABLE_SANITIZER_UNDEFINED)
+  set(SANITIZERS "")
+
+  if(AOC24_ENABLE_SANITIZER_ADDRESS)
+    list(APPEND SANITIZERS "address")
+  endif()
+
+  if(AOC24_ENABLE_SANITIZER_LEAK)
+    list(APPEND SANITIZERS "leak")
+  endif()
+
+  if(AOC24_ENABLE_SANITIZER_UNDEFINED)
+    list(APPEND SANITIZERS "undefined")
+  endif()
+
+  if(AOC24_ENABLE_SANITIZER_MEMORY)
+    if("address" IN_LIST SANITIZERS OR "leak" IN_LIST SANITIZERS)
+      message(WARNING "Memory sanitizer does not work with Address or Leak sanitizer enabled")
+    else()
+      list(APPEND SANITIZERS "memory")
+    endif()
+  endif()
+
+  list(JOIN SANITIZERS "," LIST_OF_SANITIZERS)
+
+  if(LIST_OF_SANITIZERS)
+    if(NOT "${LIST_OF_SANITIZERS}" STREQUAL "")
+      add_compile_options(-fsanitize=${LIST_OF_SANITIZERS})
+      add_link_options(-fsanitize=${LIST_OF_SANITIZERS})
+    endif()
   endif()
 endif()
 
