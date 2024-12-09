@@ -1,17 +1,25 @@
-#include <iostream>
 #include <vector>
-#include <map>
-#include <algorithm>
+#include <string>
 #include <cassert>
-#include <cmath>
 
-#include <advent_2024_lib.hpp>
-#include <fmt/core.h>
+#include <fmt/format.h>
 #include <CLI/CLI.hpp>
 
-int main() {
+#include <advent_2024_lib.hpp>
+
+int main(int argc, char *argv[]) {
+    // Setup
+    CLI::App app{"Advent of Code (2024) Day One"};
+
+    std::string file_path;
+    app.add_option("-f,--file", file_path, "Required input data file path")
+        ->required()
+        ->check(CLI::ExistingFile);
+
+    CLI11_PARSE(app, argc, argv);
+
     // Data pre-processing
-    auto data = read_delim_file("day1_input.txt", true);
+    auto data = read_delim_file(file_path, true);
     const size_t n_rows = data.size();
 
     std::vector<int> list1(n_rows);
@@ -28,16 +36,13 @@ int main() {
 
     InputLists lists = {list1, list2};
 
-    std::cout << "Total distance for " << n_rows << " rows: " << total_distance << '\n';
     // Part One
     size_t total_distance = day1_part1(lists);
+    fmt::print("Total distance for {} rows: {}\n", n_rows, total_distance);
 
     // Part Two
-        }
-    }
-
-    std::cout << "Total similarity for " << n_rows << " rows: " << total_similarity << '\n';
     size_t total_similarity = day1_part2(lists);
+    fmt::print("Total similarity for {} rows: {}\n", n_rows, total_similarity);
 
     return 0;
 }
