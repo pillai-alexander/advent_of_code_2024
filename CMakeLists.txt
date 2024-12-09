@@ -57,6 +57,10 @@ if(PROJECT_IS_TOP_LEVEL)
   # set(AOC24_ENABLE_SANITIZER_UNDEFINED ON) // sanitizers dont seem to behave great rn (esp with gtest)
 endif()
 
+include(cmake/CPM.cmake)
+
+CPMAddPackage("gh:fmtlib/fmt#11.0.2")
+CPMAddPackage("gh:CLIUtils/CLI11@2.4.2")
 # If the environment has these set, pull them into proper variables.
 set(CLANG_WARNINGS ${CLANG_COMPILE_FLAGS})
 set(GCC_WARNINGS   ${GCC_COMPILE_FLAGS})
@@ -117,11 +121,6 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:${GCC_WARNINGS}>")
 endif()
-
-include(cmake/CPM.cmake)
-
-CPMAddPackage("gh:fmtlib/fmt#11.0.2")
-CPMAddPackage("gh:CLIUtils/CLI11@2.4.2")
 
 if(AOC24_ENABLE_CLANG_TIDY)
   find_program(CLANGTIDY clang-tidy)
