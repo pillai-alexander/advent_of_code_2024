@@ -14,6 +14,7 @@ size_t day1_part1(InputLists input) {
 
     size_t total_distance = 0;
     for (size_t i = 0; i < n_rows; ++i) {
+        // cppcheck-suppress useStlAlgorithm
         total_distance += static_cast<size_t>(std::abs(input.left_list[i] - input.right_list[i]));
     }
 
@@ -33,6 +34,7 @@ size_t day1_part2(const InputLists& input) {
     size_t total_similarity = 0;
     for (const auto& val : input.left_list) {
         if (static_cast<bool>(right_list_counts.count(val))) {
+            // cppcheck-suppress useStlAlgorithm
             total_similarity += static_cast<size_t>(val) * right_list_counts.at(val);
         }
     }
