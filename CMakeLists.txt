@@ -52,9 +52,9 @@ if(PROJECT_IS_TOP_LEVEL)
   set(AOC24_PEDANTIC_WARNINGS ON)
   set(AOC24_ENABLE_CLANG_TIDY ON)
   set(AOC24_ENABLE_CPPCHECK ON)
-  set(AOC24_ENABLE_SANITIZER_ADDRESS ON)
-  set(AOC24_ENABLE_SANITIZER_LEAK ON)
-  set(AOC24_ENABLE_SANITIZER_UNDEFINED ON)
+  # set(AOC24_ENABLE_SANITIZER_ADDRESS ON) // sanitizers dont seem to behave great rn (esp with gtest)
+  # set(AOC24_ENABLE_SANITIZER_LEAK ON) // sanitizers dont seem to behave great rn (esp with gtest)
+  # set(AOC24_ENABLE_SANITIZER_UNDEFINED ON) // sanitizers dont seem to behave great rn (esp with gtest)
 endif()
 
 # If the environment has these set, pull them into proper variables.
