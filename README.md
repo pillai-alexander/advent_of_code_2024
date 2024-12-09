@@ -1,5 +1,7 @@
 # Advent of Code 2024
-Alexander N. Pillai
+
+![linux](https://github.com/pillai-alexander/advent_of_code_2024/actions/workflows/linux.yml/badge.svg)
+
 
 ## Goal: learn better C++ workflow practices
 I want to use AoC 2024 to learn about more modern C++ best practices and workflows to improve my own development. This includes using tools such as:
