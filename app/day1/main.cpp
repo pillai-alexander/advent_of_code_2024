@@ -1,15 +1,25 @@
-#include <iostream>
 #include <vector>
-#include <map>
-#include <algorithm>
+#include <string>
 #include <cassert>
-#include <cmath>
+
+#include <fmt/format.h>
+#include <CLI/CLI.hpp>
 
 #include <advent_2024_lib.hpp>
 
-int main() {
+int main(int argc, char *argv[]) {
+    // Setup
+    CLI::App app{"Advent of Code (2024) Day One"};
+
+    std::string file_path;
+    app.add_option("-f,--file", file_path, "Required input data file path")
+        ->required()
+        ->check(CLI::ExistingFile);
+
+    CLI11_PARSE(app, argc, argv);
+
     // Data pre-processing
-    auto data = read_delim_file("day1_input.txt", true);
+    auto data = read_delim_file(file_path, true);
     const size_t n_rows = data.size();
 
     std::vector<int> list1(n_rows);
@@ -24,35 +34,15 @@ int main() {
         assert(list2[i] >= 0);
     }
 
+    const InputLists lists = {list1, list2};
+
     // Part One
-    std::sort(list1.begin(), list1.end());
-    std::sort(list2.begin(), list2.end());
-
-    size_t total_distance = 0;
-    for (size_t i = 0; i < n_rows; ++i) {
-        total_distance += static_cast<size_t>(std::abs(list1[i] - list2[i]));
-    }
-
-    std::cout << "Total distance for " << n_rows << " rows: " << total_distance << '\n';
+    size_t total_distance = day1_part1(lists);
+    fmt::print("Total distance for {} rows: {}\n", n_rows, total_distance);
 
     // Part Two
-    std::map<int, size_t> list2_counts;
-    for (const auto& val : list2) {
-        if (static_cast<bool>(list2_counts.count(val))) {
-            list2_counts.at(val)++;
-        } else {
-            list2_counts[val] = 1;
-        }
-    }
-
-    size_t total_similarity = 0;
-    for (const auto& val : list1) {
-        if (static_cast<bool>(list2_counts.count(val))) {
-            total_similarity += static_cast<size_t>(val) * list2_counts.at(val);
-        }
-    }
-
-    std::cout << "Total similarity for " << n_rows << " rows: " << total_similarity << '\n';
+    size_t total_similarity = day1_part2(lists);
+    fmt::print("Total similarity for {} rows: {}\n", n_rows, total_similarity);
 
     return 0;
 }

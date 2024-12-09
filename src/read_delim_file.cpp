@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 
+#include <advent_2024_lib.hpp>
+
 std::vector<std::vector<std::string>> read_delim_file(const std::string& path, const bool is_whitespace_delim, const char delim) {
     std::ifstream file(path);
 
