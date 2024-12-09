@@ -46,6 +46,7 @@ option(AOC24_ENABLE_SANITIZER_ADDRESS   "Enable address sanitizer" OFF)
 option(AOC24_ENABLE_SANITIZER_LEAK      "Enable leak sanitizer" OFF)
 option(AOC24_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizer" OFF)
 option(AOC24_ENABLE_SANITIZER_MEMORY    "Enable memory sanitizer" OFF)
+option(AOC24_ENABLE_TESTS               "Build with tests" OFF)
 
 if(PROJECT_IS_TOP_LEVEL)
   set(AOC24_WARNINGS_AS_ERRORS ON)
@@ -55,12 +56,15 @@ if(PROJECT_IS_TOP_LEVEL)
   # set(AOC24_ENABLE_SANITIZER_ADDRESS ON) // sanitizers dont seem to behave great rn (esp with gtest)
   # set(AOC24_ENABLE_SANITIZER_LEAK ON) // sanitizers dont seem to behave great rn (esp with gtest)
   # set(AOC24_ENABLE_SANITIZER_UNDEFINED ON) // sanitizers dont seem to behave great rn (esp with gtest)
+  set(AOC24_ENABLE_TESTS ON)
 endif()
 
 include(cmake/CPM.cmake)
 
 CPMAddPackage("gh:fmtlib/fmt#11.0.2")
 CPMAddPackage("gh:CLIUtils/CLI11@2.4.2")
+CPMAddPackage("gh:google/googletest@1.15.2")
+
 # If the environment has these set, pull them into proper variables.
 set(CLANG_WARNINGS ${CLANG_COMPILE_FLAGS})
 set(GCC_WARNINGS   ${GCC_COMPILE_FLAGS})
@@ -221,3 +225,10 @@ endif()
 add_subdirectory(src)
 
 add_subdirectory(app)
+
+include(CTest)
+
+if(AOC24_ENABLE_TESTS AND PROJECT_IS_TOP_LEVEL)
+  message("-- Building tests")
+  add_subdirectory(test)
+endif()
