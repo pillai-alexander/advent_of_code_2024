@@ -10,7 +10,8 @@
 # directory ignores
 build/
 .vscode/
+**data/
+!test/data/
 
 # other ignores
 *.out
-**data/
