@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
         assert(list2[i] >= 0);
     }
 
-    InputLists lists = {list1, list2};
+    const InputLists lists = {list1, list2};
 
     // Part One
     size_t total_distance = day1_part1(lists);

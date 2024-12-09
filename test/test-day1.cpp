@@ -29,7 +29,7 @@ TEST(aoc24_example_input, day1) {
         assert(list2[i] >= 0);
     }
 
-    InputLists lists = {list1, list2};
+    const InputLists lists = {list1, list2};
 
     EXPECT_EQ(day1_part1(lists), 11);
 }
@@ -51,7 +51,7 @@ TEST(aoc24_example_input, day1) {
 //         assert(list2[i] >= 0);
 //     }
 
-//     InputLists lists = {list1, list2};
+    const InputLists lists = {list1, list2};
 
 //     EXPECT_EQ(day1_part2(lists), 31);
 // }
