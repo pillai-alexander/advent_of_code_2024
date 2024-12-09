@@ -26,35 +26,18 @@ int main() {
         assert(list2[i] >= 0);
     }
 
-    // Part One
-    std::sort(list1.begin(), list1.end());
-    std::sort(list2.begin(), list2.end());
-
-    size_t total_distance = 0;
-    for (size_t i = 0; i < n_rows; ++i) {
-        total_distance += static_cast<size_t>(std::abs(list1[i] - list2[i]));
-    }
+    InputLists lists = {list1, list2};
 
     std::cout << "Total distance for " << n_rows << " rows: " << total_distance << '\n';
+    // Part One
+    size_t total_distance = day1_part1(lists);
 
     // Part Two
-    std::map<int, size_t> list2_counts;
-    for (const auto& val : list2) {
-        if (static_cast<bool>(list2_counts.count(val))) {
-            list2_counts.at(val)++;
-        } else {
-            list2_counts[val] = 1;
-        }
-    }
-
-    size_t total_similarity = 0;
-    for (const auto& val : list1) {
-        if (static_cast<bool>(list2_counts.count(val))) {
-            total_similarity += static_cast<size_t>(val) * list2_counts.at(val);
         }
     }
 
     std::cout << "Total similarity for " << n_rows << " rows: " << total_similarity << '\n';
+    size_t total_similarity = day1_part2(lists);
 
     return 0;
 }
