@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <string>
-#include <iostream>
 
 #include <advent_2024_lib.hpp>
 
@@ -12,7 +11,7 @@ TEST(HelloTest, BasicAssertions) {
   EXPECT_EQ(7 * 6, 42);
 }
 
-TEST(aoc24_example_input, day1) {
+TEST(aoc24_day1, part1) {
     // Data pre-processing
     auto data = read_delim_file("data/day1_example.txt", true);
     const size_t n_rows = data.size();
@@ -34,7 +33,7 @@ TEST(aoc24_example_input, day1) {
     EXPECT_EQ(day1_part1(lists), 11);
 }
 
-TEST(aoc24_example_input, day2) {
+TEST(aoc24_day1, part2) {
     // Data pre-processing
     auto data = read_delim_file("data/day1_example.txt", true);
     const size_t n_rows = data.size();
