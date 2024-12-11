@@ -44,6 +44,10 @@ int day2_challenge(const std::string& file) {
     auto n_safe_reports = day2_part1(reports);
     fmt::println("Number of safe reports: {}", n_safe_reports);
 
+    // Part Two
+    n_safe_reports = day2_part2(reports);
+    fmt::println("Number of safe reports with dampening: {}", n_safe_reports);
+
     return 0;
 }
 

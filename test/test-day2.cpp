@@ -16,3 +16,10 @@ TEST(aoc24_day2, part1) {
 
     EXPECT_EQ(n_safe_reports, 2);
 }
+
+TEST(aoc24_day2, part2) {
+    auto reports = day2_pre_processing("data/day2_example.txt");
+    auto n_safe_reports = day2_part2(reports);
+
+    EXPECT_EQ(n_safe_reports, 4);
+}
