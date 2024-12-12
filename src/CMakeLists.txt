@@ -1,5 +1,5 @@
 add_library(advent_2024_library
-  read_delim_file.cpp
+  utilities.cpp
   day1.cpp
   day2.cpp
   advent_2024_lib.hpp
