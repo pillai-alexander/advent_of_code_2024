@@ -58,6 +58,10 @@ int day3_challenge(const std::string& file) {
     int total_result = day3_part1(instructions);
     fmt::println("Total product: {}", total_result);
 
+    // Part Two
+    total_result = day3_part2(instructions);
+    fmt::println("Total product with conditionals: {}", total_result);
+
     return 0;
 }
 

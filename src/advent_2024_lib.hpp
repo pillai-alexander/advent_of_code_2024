@@ -21,3 +21,4 @@ size_t day2_part2(const std::vector<std::vector<int>>& reports);
 
 // Day Three
 int day3_part1(const std::vector<std::string>& instructions);
+int day3_part2(const std::vector<std::string>& instructions);
