@@ -29,3 +29,16 @@ std::vector<std::vector<std::string>> read_delim_file(const std::string& path, c
     file.close();
     return parsed_tokens;
 }
+
+std::vector<std::string> read_file_lines(const std::string& path) {
+    std::ifstream file(path);
+
+    std::vector<std::string> read_lines;
+    std::string line;
+    while (std::getline(file, line)) {
+        read_lines.push_back(line);
+    }
+
+    file.close();
+    return read_lines;
+}
