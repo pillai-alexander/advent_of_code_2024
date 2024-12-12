@@ -2,9 +2,6 @@
 #include <string>
 #include <cmath>
 
-#include <fmt/format.h>
-#include <fmt/ranges.h>
-
 #include <advent_2024_lib.hpp>
 
 std::vector<std::vector<int>> day2_pre_processing(const std::string& path) {
