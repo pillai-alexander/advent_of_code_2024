@@ -2,6 +2,7 @@ add_library(advent_2024_library
   utilities.cpp
   day1.cpp
   day2.cpp
+  day3.cpp
   advent_2024_lib.hpp
 )
 

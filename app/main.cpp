@@ -51,10 +51,21 @@ int day2_challenge(const std::string& file) {
     return 0;
 }
 
+int day3_challenge(const std::string& file) {
+    auto instructions = read_file_lines(file);
+
+    // Part One
+    int total_result = day3_part1(instructions);
+    fmt::println("Total product: {}", total_result);
+
+    return 0;
+}
+
 int run_challenge(const unsigned int day, const std::string& file) {
     switch (day) {
         case 1: { return day1_challenge(file); }
         case 2: { return day2_challenge(file); }
+        case 3: { return day3_challenge(file); }
         default: { return 0; }
     }
 }
