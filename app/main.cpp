@@ -53,7 +53,7 @@ int day2_challenge(const std::string& file) {
 
 int run_challenge(const unsigned int day, const std::string& file) {
     switch (day) {
-        case 1: return day1_challenge(file);
+        case 1: { return day1_challenge(file); }
         case 2: { return day2_challenge(file); }
         default: { return 0; }
     }
