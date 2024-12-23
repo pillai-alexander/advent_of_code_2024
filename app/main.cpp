@@ -80,7 +80,7 @@ std::string look_ahead(const std::vector<std::string>& text, size_t mut_idx,
                        const size_t& cnst_idx, bool up_down) {
     std::string selection;
     for (size_t i = mut_idx; i <= (mut_idx + 3); ++i) {
-        selection += (up_down) ? text[i][cnst_idx] : text[cnst_idx][i];;
+        selection += (up_down) ? text[i][cnst_idx] : text[cnst_idx][i];
         if (i == text.size()) break;
     }
 
