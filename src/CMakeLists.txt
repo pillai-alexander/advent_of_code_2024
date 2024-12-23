@@ -3,6 +3,7 @@ add_library(advent_2024_library
   day1.cpp
   day2.cpp
   day3.cpp
+  day4.cpp
   advent_2024_lib.hpp
 )
 

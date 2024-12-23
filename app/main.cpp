@@ -65,101 +65,12 @@ int day3_challenge(const std::string& file) {
     return 0;
 }
 
-std::string look_behind(const std::vector<std::string>& text, size_t mut_idx,
-                       const size_t& cnst_idx, bool up_down) {
-    std::string selection;
-    for (size_t i = mut_idx; i >= (mut_idx - 3); --i) {
-        selection += (up_down) ? text[i][cnst_idx] : text[cnst_idx][i];
-        if (i == 0) break;
-    }
-
-    return selection;
-}
-
-std::string look_ahead(const std::vector<std::string>& text, size_t mut_idx,
-                       const size_t& cnst_idx, bool up_down) {
-    std::string selection;
-    for (size_t i = mut_idx; i <= (mut_idx + 3); ++i) {
-        selection += (up_down) ? text[i][cnst_idx] : text[cnst_idx][i];
-        if (i == text.size()) break;
-    }
-
-    return selection;
-}
-
-enum SearchDirection{
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    NUM_SEARCH_DIRECTIONS
-};
-
-std::string search(const SearchDirection dir, const std::vector<std::string>& text,
-                   size_t mut_idx, const size_t& cnst_idx) {
-    switch (dir) {
-        case UP:    { return look_behind(text, mut_idx, cnst_idx, true); }
-        case DOWN:  { return look_ahead(text, mut_idx, cnst_idx, true); }
-        case LEFT:  { return look_behind(text, mut_idx, cnst_idx, false); }
-        case RIGHT: { return look_ahead(text, mut_idx, cnst_idx, false); }
-        case NUM_SEARCH_DIRECTIONS:
-        default: {
-            fmt::println("ERROR: Invalid search direction.");
-            return std::string("");
-        }
-    }
-}
-
 int day4_challenge(const std::string& file) {
     auto lines = read_file_lines(file);
 
-    for (size_t row = 0; row < lines.size(); ++row) {
-        for (size_t col = 0; col < lines[row].size(); ++col) {
-            const char letter = lines[row][col];
-            if (letter == 'X') {
-                const int i_row = static_cast<int>(row);
-                const int i_col = static_cast<int>(col);
-                const int nrows = static_cast<int>(lines.size());
-                const int ncols = static_cast<int>(lines[row].size());
-
-                const bool can_look_up    = (i_row - 3) >= 0;
-                const bool can_look_down  = (i_row + 3) < nrows;
-                const bool can_look_left  = (i_col - 3) >= 0;
-                const bool can_look_right = (i_col + 3) < ncols;
-
-                fmt::println("{} @ ({},{}): u({}), d({}), l({}), r({})",
-                    letter, row, col, can_look_up, can_look_down, can_look_left, can_look_right);
-
-                if (can_look_up) {
-                    std::string selection = search(UP, lines, row, col);
-                    if (selection == "XMAS") {
-                        fmt::println("\tu({})", selection);
-                    }
-                }
-
-                if (can_look_down) {
-                    std::string selection = search(DOWN, lines, row, col);
-                    if (selection == "XMAS") {
-                        fmt::println("\td({})", selection);
-                    }
-                }
-
-                if (can_look_left) {
-                    std::string selection = search(LEFT, lines, col, row);
-                    if (selection == "XMAS") {
-                        fmt::println("\tl({})", selection);
-                    }
-                }
-
-                if (can_look_right) {
-                    std::string selection = search(RIGHT, lines, col, row);
-                    if (selection == "XMAS") {
-                        fmt::println("\tr({})", selection);
-                    }
-                }
-            }
-        }
-    }
+    // Part One
+    size_t total_matches = day4_part1(lines);
+    fmt::println("Total XMAS matches: {}", total_matches);
 
     return 0;
 }

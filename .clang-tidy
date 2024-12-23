@@ -15,6 +15,7 @@ Checks: "*,
         -misc-non-private-member-variables-in-classes,
         -misc-include-cleaner,
         -bugprone-exception-escape,
+        -bugprone-easily-swappable-parameters,
 "
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
