@@ -2,6 +2,7 @@ add_executable(tests
   test-day1.cpp
   test-day2.cpp
   test-day3.cpp
+  test-day4.cpp
 )
 target_link_libraries(tests advent_2024_library gtest gtest_main)
 
