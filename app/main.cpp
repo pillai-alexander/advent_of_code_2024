@@ -72,6 +72,9 @@ int day4_challenge(const std::string& file) {
     size_t total_matches = day4_part1(lines);
     fmt::println("Total XMAS matches: {}", total_matches);
 
+    total_matches = day4_part2(lines);
+    fmt::println("Total X-MAS matches: {}", total_matches);
+
     return 0;
 }
 

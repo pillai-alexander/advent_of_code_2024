@@ -40,7 +40,9 @@ enum SearchDirection{
 
 struct RowColIdx { size_t row; size_t col; };
 
-std::string look_straight(const std::vector<std::string>& text, const RowColIdx& idxs, const SearchDirection dir);
-std::string look_diagonal(const std::vector<std::string>& text, const RowColIdx& idxs, const SearchDirection dir);
-std::string search(const SearchDirection dir, const std::vector<std::string>& text, RowColIdx idxs);
+std::string look_straight(const std::vector<std::string>& text, const RowColIdx& idxs, const SearchDirection dir, const size_t len);
+std::string look_diagonal(const std::vector<std::string>& text, const RowColIdx& idxs, const SearchDirection dir, const size_t len);
+std::string search(const SearchDirection dir, const std::vector<std::string>& text, RowColIdx idxs, const size_t len);
+
 size_t day4_part1(const std::vector<std::string>& lines);
+size_t day4_part2(const std::vector<std::string>& lines);
