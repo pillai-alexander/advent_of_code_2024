@@ -65,11 +65,25 @@ int day3_challenge(const std::string& file) {
     return 0;
 }
 
+int day4_challenge(const std::string& file) {
+    auto lines = read_file_lines(file);
+
+    // Part One
+    size_t total_matches = day4_part1(lines);
+    fmt::println("Total XMAS matches: {}", total_matches);
+
+    total_matches = day4_part2(lines);
+    fmt::println("Total X-MAS matches: {}", total_matches);
+
+    return 0;
+}
+
 int run_challenge(const unsigned int day, const std::string& file) {
     switch (day) {
         case 1: { return day1_challenge(file); }
         case 2: { return day2_challenge(file); }
         case 3: { return day3_challenge(file); }
+        case 4: { return day4_challenge(file); }
         default: { return 0; }
     }
 }
