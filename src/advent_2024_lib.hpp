@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <map>
 #include <string>
 
 // Utilities
@@ -46,3 +47,7 @@ std::string search(const SearchDirection dir, const std::vector<std::string>& te
 
 size_t day4_part1(const std::vector<std::string>& lines);
 size_t day4_part2(const std::vector<std::string>& lines);
+
+// Day Five
+struct PrintData { std::map<int, int> ordering_instrs; std::vector<std::vector<int>> updates; };
+PrintData day5_pre_processing(const std::vector<std::string>& lines);
