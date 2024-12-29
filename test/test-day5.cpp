@@ -17,13 +17,13 @@ TEST(aoc24_day5, pre_processing) {
 TEST(aoc24_day5, part1) {
     auto lines = read_file_lines("data/day5_example.txt");
     auto print_data = day5_pre_processing(lines);
-    size_t middle_page_sum = day5_part1(print_data);
+    const size_t middle_page_sum = day5_part1(print_data);
     EXPECT_EQ(middle_page_sum, 143);
 }
 
 TEST(aoc24_day5, part2) {
     auto lines = read_file_lines("data/day5_example.txt");
     auto print_data = day5_pre_processing(lines);
-    size_t middle_page_sum = day5_part2(print_data);
+    const size_t middle_page_sum = day5_part2(print_data);
     EXPECT_EQ(middle_page_sum, 123);
 }

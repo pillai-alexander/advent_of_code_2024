@@ -92,14 +92,15 @@ int day5_challenge(const std::string& file) {
 }
 
 int run_challenge(const unsigned int day, const std::string& file) {
-    switch (day) {
-        case 1: { return day1_challenge(file); }
-        case 2: { return day2_challenge(file); }
-        case 3: { return day3_challenge(file); }
-        case 4: { return day4_challenge(file); }
-        case 5: { return day5_challenge(file); }
-        default: { return 0; }
-    }
+    const std::vector<int (*)(const std::string&)> challenges{
+        day1_challenge,
+        day2_challenge,
+        day3_challenge,
+        day4_challenge,
+        day5_challenge
+    };
+
+    return challenges[day - 1](file);
 }
 
 int main(int argc, char *argv[]) {
