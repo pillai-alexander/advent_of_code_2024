@@ -60,5 +60,7 @@ struct PagePair{ int first_page; int second_page; };
 PrintData day5_pre_processing(const std::vector<std::string>& lines);
 bool valid_order(const PagePair& pages, const std::unordered_map<int, std::unordered_set<int>>& order_instrs);
 bool valid_update(const std::vector<int>& update, const std::unordered_map<int, std::unordered_set<int>>& order_instrs);
+std::vector<int> correct_update_order(const std::vector<int>& update, const std::unordered_map<int, std::unordered_set<int>>& order_instrs);
 
 size_t day5_part1(const PrintData& print_data);
+size_t day5_part2(const PrintData& print_data);

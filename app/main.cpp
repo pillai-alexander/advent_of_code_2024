@@ -85,6 +85,9 @@ int day5_challenge(const std::string& file) {
     size_t middle_page_sum = day5_part1(print_data);
     fmt::println("Middle page-number sum: {}", middle_page_sum);
 
+    middle_page_sum = day5_part2(print_data);
+    fmt::println("Middle page-number sum: {}", middle_page_sum);
+
     return 0;
 }
 

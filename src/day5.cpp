@@ -4,6 +4,9 @@
 #include <string>
 #include <sstream>
 
+#include <fmt/format.h>
+#include <fmt/ranges.h>
+
 #include <advent_2024_lib.hpp>
 
 PrintData day5_pre_processing(const std::vector<std::string>& lines) {
@@ -64,6 +67,37 @@ size_t day5_part1(const PrintData& print_data) {
             const auto mid = update.size() / 2;
             const auto midpage = static_cast<size_t>(update.at(mid));
             middle_page_sum += midpage;
+        }
+    }
+    return middle_page_sum;
+}
+
+std::vector<int> correct_update_order(const std::vector<int>& update, const std::unordered_map<int, std::unordered_set<int>>& order_instrs) {
+    auto update_copy = update;
+    while (not valid_update(update_copy, order_instrs)) {
+        for (size_t i = 0; i < (update_copy.size() - 1); ++i) {
+            const PagePair pages = {update_copy.at(i), update_copy.at(i + 1)};
+            if (not valid_order(pages, order_instrs)) {
+                const auto tmp        = update_copy.at(i);
+                update_copy.at(i)     = update_copy.at(i + 1);
+                update_copy.at(i + 1) = tmp;
+            }
+        }
+    }
+
+    return update_copy;
+}
+
+size_t day5_part2(const PrintData& print_data) {
+    const auto& order_instrs = print_data.ordering_instrs;
+    size_t middle_page_sum = 0;
+    for (const auto& update : print_data.updates) {
+        if (not valid_update(update, order_instrs)) {
+            const auto corrected_update = correct_update_order(update, order_instrs);
+
+            const auto mid     = corrected_update.size() / 2;
+            const auto midpage = static_cast<size_t>(corrected_update.at(mid));
+            middle_page_sum   += midpage;
         }
     }
     return middle_page_sum;
