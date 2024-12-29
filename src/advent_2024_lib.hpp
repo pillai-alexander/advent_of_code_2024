@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <unordered_map>
+#include <unordered_set>
 #include <string>
 
 // Utilities
@@ -46,3 +48,19 @@ std::string search(const SearchDirection dir, const std::vector<std::string>& te
 
 size_t day4_part1(const std::vector<std::string>& lines);
 size_t day4_part2(const std::vector<std::string>& lines);
+
+// Day Five
+struct PrintData {
+    std::unordered_map<int, std::unordered_set<int>> ordering_instrs;
+    std::vector<std::vector<int>> updates;
+};
+
+struct PagePair{ int first_page; int second_page; };
+
+PrintData day5_pre_processing(const std::vector<std::string>& lines);
+bool valid_order(const PagePair& pages, const std::unordered_map<int, std::unordered_set<int>>& order_instrs);
+bool valid_update(const std::vector<int>& update, const std::unordered_map<int, std::unordered_set<int>>& order_instrs);
+std::vector<int> correct_update_order(const std::vector<int>& update, const std::unordered_map<int, std::unordered_set<int>>& order_instrs);
+
+size_t day5_part1(const PrintData& print_data);
+size_t day5_part2(const PrintData& print_data);

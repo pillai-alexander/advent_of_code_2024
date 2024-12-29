@@ -78,14 +78,29 @@ int day4_challenge(const std::string& file) {
     return 0;
 }
 
+int day5_challenge(const std::string& file) {
+    auto lines = read_file_lines(file);
+    auto print_data = day5_pre_processing(lines);
+
+    size_t middle_page_sum = day5_part1(print_data);
+    fmt::println("Middle page-number sum: {}", middle_page_sum);
+
+    middle_page_sum = day5_part2(print_data);
+    fmt::println("Middle page-number sum: {}", middle_page_sum);
+
+    return 0;
+}
+
 int run_challenge(const unsigned int day, const std::string& file) {
-    switch (day) {
-        case 1: { return day1_challenge(file); }
-        case 2: { return day2_challenge(file); }
-        case 3: { return day3_challenge(file); }
-        case 4: { return day4_challenge(file); }
-        default: { return 0; }
-    }
+    const std::vector<int (*)(const std::string&)> challenges{
+        day1_challenge,
+        day2_challenge,
+        day3_challenge,
+        day4_challenge,
+        day5_challenge
+    };
+
+    return challenges[day - 1](file);
 }
 
 int main(int argc, char *argv[]) {
