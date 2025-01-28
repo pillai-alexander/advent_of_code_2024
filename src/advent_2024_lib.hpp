@@ -64,3 +64,6 @@ std::vector<int> correct_update_order(const std::vector<int>& update, const std:
 
 size_t day5_part1(const PrintData& print_data);
 size_t day5_part2(const PrintData& print_data);
+
+// Day Six
+size_t day6_part1(const std::vector<std::string>& map);

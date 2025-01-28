@@ -91,13 +91,23 @@ int day5_challenge(const std::string& file) {
     return 0;
 }
 
+int day6_challenge(const std::string& file) {
+    auto lines = read_file_lines(file);
+
+    size_t num_unique_locations= day6_part1(lines);
+    fmt::println("Number of uniquely-visited locations: {}", num_unique_locations);
+
+    return 0;
+}
+
 int run_challenge(const unsigned int day, const std::string& file) {
     const std::vector<int (*)(const std::string&)> challenges{
         day1_challenge,
         day2_challenge,
         day3_challenge,
         day4_challenge,
-        day5_challenge
+        day5_challenge,
+        day6_challenge
     };
 
     return challenges[day - 1](file);

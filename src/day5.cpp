@@ -4,9 +4,6 @@
 #include <string>
 #include <sstream>
 
-#include <fmt/format.h>
-#include <fmt/ranges.h>
-
 #include <advent_2024_lib.hpp>
 
 PrintData day5_pre_processing(const std::vector<std::string>& lines) {
